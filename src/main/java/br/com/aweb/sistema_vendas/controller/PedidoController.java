@@ -53,7 +53,7 @@ public class PedidoController {
         }
 
         Pedido pedido = pedidoService.criarPedido(optionalCliente.get());
-        return "redirect:/pedidos/edit";
+        return "redirect:/pedidos/edit/" + pedido.getId();
     }
     
     @GetMapping("/edit/{id}")

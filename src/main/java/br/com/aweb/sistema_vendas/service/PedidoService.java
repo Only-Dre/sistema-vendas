@@ -43,7 +43,7 @@ public class PedidoService {
     }
 
     @Transactional 
-    public void adicionarPedido(Long pedidoId, Long produtoId, Integer quantidade){
+    public void adicionarItem(Long pedidoId, Long produtoId, Integer quantidade){
         Optional<Pedido> optionalPedido = pedidoRepository.findById(pedidoId);
         Optional<Produto> optionalProduto = produtoRepository.findById(produtoId);
 

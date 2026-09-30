@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edição de Pedido</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Pedido <span th:text="'#' + ${pedido.id}"></span></h1>
+
+    <table class="table table-bordered">
+        <tr>
+            <th style="width: 20%">Cliente</th>
+            <td th:text="${pedido.cliente.nome}"></td>
+        </tr>
+        <tr>
+            <th>Data</th>
+            <td th:text="${pedido.data_pedido.dayOfMonth} + '/' + ${pedido.data_pedido.monthValue} + '/' + ${pedido.data_pedido.year}"></td>
+        </tr>
+        <tr>
+            <th>Valor Total</th>
+            <td><strong th:text="'R$ ' + ${#numbers.formatDecimal(pedido.valorTotal, 1, 'POINT', 2, 'COMMA')}"></strong></td>
+        </tr>
+    </table>
+
+    <h4>Itens</h4>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Subtotal</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${pedido.itens}">
+            <td th:text="${item.produto.nome}"></td>
+            <td th:text="${item.quantidade}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.preco_unitario, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.preco_unitario * item.quantidade, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td>
+                <form th:action="@{/pedidos/{pedidoId}/remover-item/{itemId}(pedidoId=${pedido.id}, itemId=${item.id})}"
+                      method="post" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(pedido.itens)}">
+            <td colspan="5" class="text-center text-muted">Nenhum item adicionado.</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h4>Adicionar Item</h4>
+    <form th:action="@{/pedidos/{id}/adicionar-item(id=${pedido.id})}" method="post" class="row g-3 mb-4">
+        <div class="col-md-6">
+            <label for="produtoId" class="form-label">Produto</label>
+            <select class="form-select" id="produtoId" name="produtoId" required>
+                <option value="" selected disabled>Selecione um produto</option>
+                <option th:each="produto : ${produtos}"
+                        th:value="${produto.id}"
+                        th:text="${produto.nome} + ' - R$ ' + ${#numbers.formatDecimal(produto.preco, 1, 'POINT', 2, 'COMMA')} + ' (estoque: ' + ${produto.quantidadeEstoque} + ')'"></option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="quantidade" class="form-label">Quantidade</label>
+            <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" value="1" required>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+        </div>
+    </form>
+
+    <form th:action="@{/pedidos/{id}/finalizar(id=${pedido.id})}" method="post" class="d-inline">
+        <button type="submit" class="btn btn-success">Finalizar</button>
+    </form>
+    <a th:href="@{/pedidos}" class="btn btn-secondary">Voltar</a>
+</div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Pedido</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Novo Pedido</h2>
+    <form th:action="@{/pedidos/novo}" method="post">
+        <div class="mb-3">
+            <label for="clienteId" class="form-label">Cliente</label>
+            <select class="form-select" id="clienteId" name="clienteId" required>
+                <option value="" selected disabled>Selecione um cliente</option>
+                <option th:each="cliente : ${clientes}"
+                        th:value="${cliente.id}"
+                        th:text="${cliente.nome} + ' - CPF: ' + ${cliente.cpf}"></option>
+            </select>
+        </div>
+
+        <p class="text-muted">Depois de criar o pedido, você poderá adicionar os produtos.</p>
+
+        <button type="submit" class="btn btn-primary">Criar Pedido</button>
+        <a th:href="@{/pedidos}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

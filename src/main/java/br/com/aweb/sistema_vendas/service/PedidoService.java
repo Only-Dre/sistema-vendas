@@ -134,6 +134,10 @@ public class PedidoService {
 
         Pedido pedido = optionalPedido.get();
 
+        if (pedido.getStatus() == StatusPedido.CANCELADO){
+            throw new IllegalArgumentException("Pedido já está cancelado.");
+        }
+
         // Devolve todos os itens ao estoque
         for(ItemPedido item : pedido.getItens()){
             Produto produto = item.getProduto();

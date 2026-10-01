@@ -30,9 +30,9 @@
         </div>
 
         <div class="mb-3">
-            <label for="quantidadeEmEstoque" class="form-label">Quantidade em Estoque</label>
-            <input type="number" class="form-control" id="quantidadeEmEstoque" th:field="*{quantidadeEmEstoque}">
-            <div class="text-danger" th:if="${#fields.hasErrors('quantidadeEmEstoque')}" th:errors="*{quantidadeEmEstoque}"></div>
+            <label for="quantidadeEstoque" class="form-label">Quantidade em Estoque</label>
+            <input type="number" class="form-control" id="quantidadeEstoque" th:field="*{quantidadeEstoque}">
+            <div class="text-danger" th:if="${#fields.hasErrors('quantidadeEstoque')}" th:errors="*{quantidadeEstoque}"></div>
         </div>        
 
         <button type="submit" class="btn btn-primary">Salvar</button>

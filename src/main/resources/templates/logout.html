@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sair</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="~{fragments/menu :: menu}"></div>
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4 text-center">
+                    <h2 class="h4 mb-3">Sair do sistema</h2>
+                    <p class="mb-4">
+                        Deseja encerrar a sessão de
+                        <strong sec:authentication="principal.nome">usuário</strong>?
+                    </p>
+
+                    <!-- POST /logout é tratado pelo Spring Security (o token CSRF é incluído pelo th:action) -->
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-danger">Confirmar saída</button>
+                        <a th:href="@{/pedidos}" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

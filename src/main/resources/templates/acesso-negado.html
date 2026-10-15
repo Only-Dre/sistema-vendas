@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Acesso negado</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="~{fragments/menu :: menu}"></div>
+
+<div class="container mt-5">
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Acesso negado</h4>
+        <p class="mb-0">Seu perfil não tem permissão para acessar esta página.</p>
+    </div>
+    <a class="btn btn-primary" th:href="@{/pedidos}">Voltar para Pedidos</a>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

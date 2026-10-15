@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Listagem de Pedidos</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
+
+<div th:replace="~{fragments/menu :: menu}"></div>
 <div class="container mt-4">
     <h1>Pedidos</h1>
     <a class="btn btn-primary mb-3" th:href="@{/pedidos/novo}">Novo Pedido</a>
-    <a class="btn btn-secondary mb-3" th:href="@{/clientes}">Clientes</a>
-    <a class="btn btn-secondary mb-3" th:href="@{/produtos}">Produtos</a>
+    <a class="btn btn-secondary mb-3" sec:authorize="hasRole('ADMIN')" th:href="@{/clientes}">Clientes</a>
+    <a class="btn btn-secondary mb-3" sec:authorize="hasRole('ADMIN')" th:href="@{/produtos}">Produtos</a>
 
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">

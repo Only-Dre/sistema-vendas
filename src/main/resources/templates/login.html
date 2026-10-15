@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5 col-lg-4">
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="h4 mb-4 text-center">Sistema de Vendas</h2>
+
+                    <div class="alert alert-danger" role="alert" th:if="${param.error != null}">
+                        E-mail ou senha inválidos.
+                    </div>
+
+                    <div class="alert alert-success" role="alert" th:if="${param.logout != null}">
+                        Você saiu do sistema com sucesso.
+                    </div>
+
+                    <!-- POST /login é tratado pelo Spring Security (campos: username e password) -->
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="username" name="username"
+                                   autocomplete="username" required autofocus>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   autocomplete="current-password" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

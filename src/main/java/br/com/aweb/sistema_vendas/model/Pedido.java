@@ -19,7 +19,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,7 +26,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "pedidos")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor 
 public class Pedido {
 
     public Pedido(Cliente cliente){
